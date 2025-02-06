@@ -1,9 +1,11 @@
-import Login from "./pages/login/Login";
+import Routers from "./routes/Routers";
 
 function App() {
   return (
     <>
-      <Login />
+      <main>
+        <Routers />
+      </main>
     </>
   );
 }
