@@ -15,12 +15,12 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
   if (!userRole) {
     // Si el usuario no está autenticado, redirigir al login
-    return <Navigate to="/Login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   if (!allowedRoles.includes(userRole)) {
     // Si el usuario no tiene permiso, mostrar un mensaje de error o redirigir
-    return <Navigate to="/Error" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;

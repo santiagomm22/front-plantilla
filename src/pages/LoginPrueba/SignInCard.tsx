@@ -124,12 +124,9 @@ export default function SignInCard() {
         switch (user.rol) {
           case "ADMINISTRADOR":
             return "/AdministrarEmpresa";
-          case "OPERARIO":
-            return "/ConfirmarDescarga";
-          case "VIGILANCIA":
-            return "/ConfirmarIngreso";
-          case "COORDINADOR":
+          case "USUARIO":
             return "/RgVactor";
+
           default:
             Notify.warning(
               "Rol no reconocido, redirigiendo a página por defecto."
