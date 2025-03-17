@@ -24,7 +24,7 @@ export default function SignInSide() {
               position: "absolute",
               zIndex: -1,
               inset: 0,
-              backgroundImage: `url('images/imgfondo.png')`, // Cambia el gradiente por la ruta de tu imagen
+              backgroundImage: `url('images/backgroundEmcali.png')`, // Cambia el gradiente por la ruta de tu imagen
               backgroundSize: "cover", // Ajusta el tamaño de la imagen para cubrir todo el fondo
               backgroundPosition: "center",
               ...theme.applyStyles("dark", {

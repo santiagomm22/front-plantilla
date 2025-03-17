@@ -1,14 +1,13 @@
 import { styled } from "@mui/material/styles";
-import Avatar from "@mui/material/Avatar";
 import MuiDrawer, { drawerClasses } from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import MenuContent from "./MenuContent";
-import OptionsMenu from "./OptionsMenu";
-import { Button } from "@mui/material";
-import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import { Avatar, Typography } from "@mui/material";
+import UserMenuButton from "./UserMenuButton";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const drawerWidth = 240;
 
@@ -39,6 +38,12 @@ export function EmcaliIcon() {
 }
 
 export default function SideMenu() {
+  const user = useSelector((state: RootState) => state.auth.user);
+
+  // Si no hay usuario, mostramos "Invitado"
+  const userName = user?.nombre || "Invitado";
+  const userInitial = userName.charAt(0).toUpperCase();
+
   return (
     <Drawer
       variant="permanent"
@@ -59,6 +64,8 @@ export default function SideMenu() {
         <EmcaliIcon />
       </Box>
       <Divider />
+
+      {/* Contenido del menú */}
       <Box
         sx={{
           overflow: "auto",
@@ -69,24 +76,25 @@ export default function SideMenu() {
       >
         <MenuContent />
       </Box>
+
+      {/* Sección de usuario con avatar y menú */}
       <Stack
         direction="row"
         sx={{
-          p: 2,
+          p: 1,
           gap: 1,
           alignItems: "center",
           borderTop: "1px solid",
           borderColor: "divider",
         }}
       >
-        <Button
-          variant="contained"
-          color="error"
-          fullWidth
-          startIcon={<LogoutRoundedIcon />}
-        >
-          Cerrar sesion
-        </Button>
+        <Avatar sx={{ width: 40, height: 40, bgcolor: "primary.main" }}>
+          {userInitial}
+        </Avatar>
+        <Typography component="p" variant="body1" sx={{ flexGrow: 1 }}>
+          {userName}
+        </Typography>
+        <UserMenuButton />
       </Stack>
     </Drawer>
   );

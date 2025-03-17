@@ -1,10 +1,10 @@
 import PaginaPrincipal from "../../components/PaginaPrincipal/PaginaPrincipal";
-import MediaControlCard from "../../components/PaginaPrincipal/Card";
+import MenuContent from "../../components/PaginaPrincipal/MenuContent";
 
-export default function Principal() {
+export default function Pagina1() {
   return (
     <PaginaPrincipal>
-      <MediaControlCard />
+      <MenuContent />
     </PaginaPrincipal>
   );
 }

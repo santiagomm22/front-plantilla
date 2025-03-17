@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import SignInSide from "../pages/LoginPrueba/SignInSide";
 import Principal from "../pages/principal/Principal";
 import ProtectedRoute from "./ProtectedRoute";
+import Pagina1 from "../pages/pagina1/Pagina1";
 
 // const Routers = () => {
 //   return (
@@ -33,6 +34,14 @@ const Routers = () => {
         element={
           <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
             <Principal />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/Pagina1"
+        element={
+          <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
+            <Pagina1 />
           </ProtectedRoute>
         }
       />
