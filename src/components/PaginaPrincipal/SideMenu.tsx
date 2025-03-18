@@ -88,7 +88,7 @@ export default function SideMenu() {
           borderColor: "divider",
         }}
       >
-        <Avatar sx={{ width: 40, height: 40, bgcolor: "primary.main" }}>
+        <Avatar sx={{ width: 40, height: 40, bgcolor: "#2f6d2b" }}>
           {userInitial}
         </Avatar>
         <Typography component="p" variant="body1" sx={{ flexGrow: 1 }}>

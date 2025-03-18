@@ -49,7 +49,7 @@ export default function SideMenuMobile({
           direction="row"
           sx={{ p: 2, pb: 0, gap: 1, alignItems: "center" }}
         >
-          <Avatar sx={{ width: 40, height: 40, bgcolor: "primary.main" }}>
+          <Avatar sx={{ width: 40, height: 40, bgcolor: "#2f6d2b" }}>
             {userInitial}
           </Avatar>
           <Typography component="p" variant="h6">

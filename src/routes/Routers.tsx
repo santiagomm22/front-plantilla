@@ -1,15 +1,16 @@
 // import Login from "../pages/login/Login";
 import { Routes, Route } from "react-router-dom";
 import SignInSide from "../pages/LoginPrueba/SignInSide";
-import Principal from "../pages/principal/Principal";
+import TablaInformativa from "../pages/USUARIO/TablaInformativa";
 import ProtectedRoute from "./ProtectedRoute";
-import Pagina1 from "../pages/pagina1/Pagina1";
+import CrearUsuario from "../pages/ADMINISTRADOR/CrearUsuario";
 
 // const Routers = () => {
 //   return (
 //     <Routes>
 //       <Route path="/" element={<SignInSide />} />
-//       <Route path="/Principal" element={<Principal />} />
+//       <Route path="/CrearUsuario" element={<CrearUsuario />} />
+//       <Route path="/TablaInformativa" element={<TablaInformativa />} />
 //     </Routes>
 //   );
 // };
@@ -22,26 +23,18 @@ const Routers = () => {
 
       {/* Rutas protegidas */}
       <Route
-        path="/RgVactor"
+        path="/CrearUsuario"
+        element={
+          <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
+            <CrearUsuario />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/TablaInformativa"
         element={
           <ProtectedRoute allowedRoles={["USUARIO"]}>
-            <Principal />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/AdministrarEmpresa"
-        element={
-          <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
-            <Principal />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/Pagina1"
-        element={
-          <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
-            <Pagina1 />
+            <TablaInformativa />
           </ProtectedRoute>
         }
       />

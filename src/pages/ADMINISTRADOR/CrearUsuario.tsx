@@ -1,10 +1,10 @@
 import PaginaPrincipal from "../../components/PaginaPrincipal/PaginaPrincipal";
-import MenuContent from "../../components/PaginaPrincipal/MenuContent";
+import TablaUsuarios from "../../components/CrearUsuario/TablaUsuarios";
 
-export default function Pagina1() {
+export default function CrearUsuario() {
   return (
     <PaginaPrincipal>
-      <MenuContent />
+      <TablaUsuarios />
     </PaginaPrincipal>
   );
 }

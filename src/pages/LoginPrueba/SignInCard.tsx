@@ -123,9 +123,9 @@ export default function SignInCard() {
       const targetRoute = (() => {
         switch (user.rol) {
           case "ADMINISTRADOR":
-            return "/AdministrarEmpresa";
+            return "/CrearUsuario";
           case "USUARIO":
-            return "/RgVactor";
+            return "/TablaInformativa";
 
           default:
             Notify.warning(

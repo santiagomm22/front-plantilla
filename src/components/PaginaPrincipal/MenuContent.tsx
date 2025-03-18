@@ -4,10 +4,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import AnalyticsRoundedIcon from "@mui/icons-material/AnalyticsRounded";
-import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
-import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store"; // Ajusta la ruta según tu estructura
@@ -15,27 +13,15 @@ import { RootState } from "../../store/store"; // Ajusta la ruta según tu estru
 // Definir opciones del menú con permisos por rol
 const menuItems = [
   {
-    text: "Home",
-    icon: <HomeRoundedIcon />,
-    path: "/Pagina1",
+    text: "Crear Usuario",
+    icon: <PersonAddAlt1Icon />,
+    path: "/CrearUsuario",
     roles: ["ADMINISTRADOR"],
   },
   {
-    text: "Analytics",
-    icon: <AnalyticsRoundedIcon />,
-    path: "/analytics",
-    roles: ["ADMINISTRADOR"],
-  },
-  {
-    text: "Clients",
-    icon: <PeopleRoundedIcon />,
-    path: "/clients",
-    roles: ["USUARIO"],
-  },
-  {
-    text: "Tasks",
-    icon: <AssignmentRoundedIcon />,
-    path: "/tasks",
+    text: "Tabla Informativa",
+    icon: <FormatListBulletedIcon />,
+    path: "/TablaInformativa",
     roles: ["USUARIO"],
   },
 ];

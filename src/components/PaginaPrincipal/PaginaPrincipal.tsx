@@ -19,10 +19,9 @@ export default function PaginaPrincipal({ children }: PaginaPrincipalProps) {
         <Stack
           spacing={2}
           sx={{
-            alignItems: "center",
-            mx: 3,
-            pb: 5,
-            mt: { xs: 8, md: 0 },
+            mt: { xs: 6, md: 0 },
+            alignItems: "flex-start", // Evita que todos los elementos ocupen el mismo ancho
+            width: "auto", // Permite que cada hijo mantenga su propio tamaño
           }}
         >
           {children}
