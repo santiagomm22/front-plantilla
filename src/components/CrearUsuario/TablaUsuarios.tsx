@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Formulario } from "./Formulario";
 import { Box } from "@mui/material";
+import { ActualizarUsuario } from "./ActualizarUsuario";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -43,14 +44,20 @@ export default function TablaUsuarios() {
   useEffect(() => {
     BuscarUsuarios();
   }, [refreshKey]);
+
+  // Función para actualizar la lista de usuarios
+  const actualizarListaUsuarios = () => {
+    setRefreshKey((prev) => prev + 1);
+  };
+
   return (
     <>
-      <Formulario usuarioAgregado={() => setRefreshKey((prev) => prev + 1)} />
+      <Formulario usuarioAgregado={actualizarListaUsuarios} />
       <Paper elevation={16} sx={{ width: "100%", overflow: "hidden" }}>
         <Box sx={{ overflowX: "auto", maxWidth: "100%" }}>
           <TableContainer>
             <Table aria-label="simple table">
-              <TableHead style={{ backgroundColor: "#2e6e2a" }}>
+              <TableHead style={{ backgroundColor: "#1a75d5" }}>
                 <TableRow>
                   <TableCell style={{ color: "white" }}>
                     <strong>Nombre</strong>
@@ -61,6 +68,9 @@ export default function TablaUsuarios() {
                   <TableCell style={{ color: "white" }}>
                     <strong>Rol</strong>
                   </TableCell>
+                  <TableCell style={{ color: "white" }}>
+                    <strong>Acciones</strong>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -69,6 +79,17 @@ export default function TablaUsuarios() {
                     <TableCell>{usuario.nombre}</TableCell>
                     <TableCell>{usuario.email}</TableCell>
                     <TableCell>{usuario.rol}</TableCell>
+                    <TableCell>
+                      <ActualizarUsuario
+                        usuario={{
+                          id: usuario.id.toString(), // Convertir a string si es necesario
+                          Nombre: usuario.nombre,
+                          Email: usuario.email,
+                          Rol: usuario.rol,
+                        }}
+                        usuarioActualizado={actualizarListaUsuarios}
+                      />
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
