@@ -37,11 +37,13 @@ interface ActualizarUsuarioProps {
     Rol: string;
   };
   usuarioActualizado: () => void;
+  usuarioEliminado: () => void; // Nueva prop para manejar la eliminación
 }
 
 export const ActualizarUsuario: React.FC<ActualizarUsuarioProps> = ({
   usuario,
   usuarioActualizado,
+  usuarioEliminado, // Recibe la prop usuarioEliminado
 }) => {
   const [open, setOpen] = React.useState(false);
   const [roles, setRoles] = React.useState<string[]>([]);
@@ -100,10 +102,21 @@ export const ActualizarUsuario: React.FC<ActualizarUsuarioProps> = ({
     },
   });
 
+  React.useEffect(() => {
+    formik.setValues({
+      Nombre: usuario.Nombre,
+      Email: usuario.Email,
+      Rol: usuario.Rol,
+    });
+  }, [usuario]);
+
   return (
     <React.Fragment>
       <ButtonGroup>
-        <EliminarUsuario />
+        <EliminarUsuario
+          usuarioId={Number(usuario.id)} // Pasa el ID del usuario
+          usuarioEliminado={usuarioEliminado} // Pasa la función para actualizar la tabla
+        />
         <Button variant="contained" onClick={handleClickOpen}>
           <EditIcon />
         </Button>

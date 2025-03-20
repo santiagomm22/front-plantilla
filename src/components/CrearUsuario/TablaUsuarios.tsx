@@ -88,6 +88,7 @@ export default function TablaUsuarios() {
                           Rol: usuario.rol,
                         }}
                         usuarioActualizado={actualizarListaUsuarios}
+                        usuarioEliminado={actualizarListaUsuarios} // Pasa la misma función
                       />
                     </TableCell>
                   </TableRow>
