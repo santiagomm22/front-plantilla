@@ -19,6 +19,24 @@ const menuItems = [
     roles: ["ADMINISTRADOR"],
   },
   {
+    text: "Crear Usuario",
+    icon: <PersonAddAlt1Icon />,
+    path: "/CrearUsuario",
+    roles: ["ADMINISTRADOR"],
+  },
+  {
+    text: "Crear Usuario",
+    icon: <PersonAddAlt1Icon />,
+    path: "/CrearUsuario",
+    roles: ["ADMINISTRADOR"],
+  },
+  {
+    text: "Crear Usuario",
+    icon: <PersonAddAlt1Icon />,
+    path: "/CrearUsuario",
+    roles: ["ADMINISTRADOR"],
+  },
+  {
     text: "Tabla Informativa",
     icon: <FormatListBulletedIcon />,
     path: "/TablaInformativa",
@@ -37,7 +55,14 @@ export default function MenuContent() {
   );
 
   return (
-    <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
+    <Stack
+      sx={{
+        flexGrow: 1,
+        p: 1,
+        justifyContent: "space-between",
+        backgroundColor: "#d9fac9",
+      }}
+    >
       <List dense>
         {filteredItems.map((item, index) => (
           <ListItem key={index} disablePadding sx={{ display: "block" }}>

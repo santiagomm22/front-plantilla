@@ -49,9 +49,6 @@ export default function SideMenu() {
       variant="permanent"
       sx={{
         display: { xs: "none", md: "block" },
-        [`& .${drawerClasses.paper}`]: {
-          backgroundColor: "background.paper",
-        },
       }}
     >
       <Box
@@ -59,6 +56,7 @@ export default function SideMenu() {
           display: "flex",
           mt: "calc(var(--template-frame-height, 0px) + 4px)",
           p: 1.5,
+          backgroundColor: "#d9fac9",
         }}
       >
         <EmcaliIcon />
@@ -86,6 +84,7 @@ export default function SideMenu() {
           alignItems: "center",
           borderTop: "1px solid",
           borderColor: "divider",
+          backgroundColor: "#d9fac9",
         }}
       >
         <Avatar sx={{ width: 40, height: 40, bgcolor: "#2f6d2b" }}>

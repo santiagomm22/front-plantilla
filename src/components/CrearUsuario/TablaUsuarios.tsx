@@ -53,11 +53,28 @@ export default function TablaUsuarios() {
   return (
     <>
       <Formulario usuarioAgregado={actualizarListaUsuarios} />
-      <Paper elevation={16} sx={{ width: "100%", overflow: "hidden" }}>
+      <Paper sx={{ width: "100%", overflow: "hidden", mt: 2 }}>
         <Box sx={{ overflowX: "auto", maxWidth: "100%" }}>
-          <TableContainer>
-            <Table aria-label="simple table">
-              <TableHead style={{ backgroundColor: "#1a75d5" }}>
+          <TableContainer
+            sx={{
+              maxWidth: "100%",
+              overflowX: "auto", // Permite scroll horizontal solo en la tabla
+              "&::-webkit-scrollbar": {
+                height: "8px", // Personaliza el scrollbar si lo deseas
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "rgba(0,0,0,0.2)",
+                borderRadius: "4px",
+              },
+            }}
+          >
+            <Table
+              aria-label="simple table"
+              sx={{
+                minWidth: 650, // Establece un ancho mínimo para forzar scroll en pantallas pequeñas
+              }}
+            >
+              <TableHead style={{ backgroundColor: "#2f6d2b" }}>
                 <TableRow>
                   <TableCell style={{ color: "white" }}>
                     <strong>Nombre</strong>

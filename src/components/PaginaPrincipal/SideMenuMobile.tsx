@@ -42,12 +42,18 @@ export default function SideMenuMobile({
         sx={{
           maxWidth: "70dvw",
           height: "100%",
+          backgroundColor: "#d9fac9",
         }}
       >
         {/* Sección de avatar y nombre */}
         <Stack
           direction="row"
-          sx={{ p: 2, pb: 0, gap: 1, alignItems: "center" }}
+          sx={{
+            p: 2,
+            pb: 0,
+            gap: 1,
+            alignItems: "center",
+          }}
         >
           <Avatar sx={{ width: 40, height: 40, bgcolor: "#2f6d2b" }}>
             {userInitial}
@@ -69,7 +75,7 @@ export default function SideMenuMobile({
         <Stack sx={{ p: 2 }}>
           <Button
             variant="contained"
-            color="error"
+            color="success"
             fullWidth
             startIcon={<LogoutRoundedIcon />}
             onClick={handleLogout}

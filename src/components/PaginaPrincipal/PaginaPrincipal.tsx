@@ -1,5 +1,7 @@
+import React from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import Paper from "@mui/material/Paper";
 import AppNavbar from "../../components/PaginaPrincipal/AppNavBar";
 import SideMenu from "../../components/PaginaPrincipal/SideMenu";
 import { ReactNode } from "react";
@@ -10,7 +12,14 @@ interface PaginaPrincipalProps {
 
 export default function PaginaPrincipal({ children }: PaginaPrincipalProps) {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      sx={{
+        display: "flex",
+        backgroundColor: "rgba(0, 0, 0, 0.08)", // Color oscuro para toda la página
+        minHeight: "100vh", // Asegura que el fondo oscuro cubra toda la altura
+        width: "100%",
+      }}
+    >
       <SideMenu />
       <AppNavbar />
 
@@ -20,11 +29,32 @@ export default function PaginaPrincipal({ children }: PaginaPrincipalProps) {
           spacing={2}
           sx={{
             mt: { xs: 6, md: 0 },
-            alignItems: "flex-start", // Evita que todos los elementos ocupen el mismo ancho
-            width: "auto", // Permite que cada hijo mantenga su propio tamaño
+            alignItems: "flex-start",
+            width: "auto",
           }}
         >
-          {children}
+          {/* Envolver cada hijo en un Paper (card-like) component */}
+          {children &&
+            React.Children.map(children, (child) => (
+              <Paper
+                elevation={3}
+                sx={{
+                  width: "fit-content", // Cambia esto
+                  alignSelf: "flex-start", // Agrega esto
+                  backgroundColor: "background.paper",
+                  borderRadius: 2,
+                  overflow: "hidden",
+                }}
+              >
+                <Box
+                  sx={{
+                    p: 2, // Padding interno
+                  }}
+                >
+                  {child}
+                </Box>
+              </Paper>
+            ))}
         </Stack>
       </Box>
     </Box>

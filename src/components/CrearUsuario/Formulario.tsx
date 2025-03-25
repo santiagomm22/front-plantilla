@@ -91,7 +91,7 @@ export const Formulario: React.FC<FormularioProps> = ({ usuarioAgregado }) => {
 
   return (
     <React.Fragment>
-      <Button variant="contained" onClick={handleClickOpen}>
+      <Button variant="contained" onClick={handleClickOpen} color="success">
         Crear Nuevo Usuario
       </Button>
       <Dialog
