@@ -1,45 +1,52 @@
-// import Login from "../pages/login/Login";
+// src/router.tsx
 import { Routes, Route } from "react-router-dom";
-import SignInSide from "../pages/LoginPrueba/SignInSide";
-import TablaInformativa from "../pages/USUARIO/TablaInformativa";
+import SignInCard from "@/pages/login/SignInCard";
+import DashboardUsuarios from "@/pages/CrearUsuarios/DashboardUsuarios";
+import RegistroForm from "@/pages/registro/RegistroForm";
 import ProtectedRoute from "./ProtectedRoute";
-import CrearUsuario from "../pages/ADMINISTRADOR/CrearUsuario";
+import MainLayout from "@/components/layouts/MainLayout";
 
 const Routers = () => {
   return (
     <Routes>
-      <Route path="/" element={<SignInSide />} />
-      <Route path="/CrearUsuario" element={<CrearUsuario />} />
-      <Route path="/TablaInformativa" element={<TablaInformativa />} />
+      {/* Rutas públicas */}
+      <Route path="/" element={<SignInCard />} />
+      <Route path="/registro" element={<RegistroForm />} />
+      <Route element={<MainLayout />}>
+        <Route path="/usuarios" element={<DashboardUsuarios />} />
+
+        {/* Rutas protegidas con AuthLayout */}
+        {/* <Route element={<MainLayout />}>
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        /> */}
+        {/* Agrega más rutas protegidas aquí según necesites */}
+        {/* Ejemplo: Ruta para Empresas */}
+        {/* <Route
+          path="/empresas"
+          element={
+            <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
+              <EmpresasPage />
+            </ProtectedRoute>
+          }
+        /> */}
+        {/* Ejemplo: Ruta para Conductores */}
+        {/* <Route
+          path="/conductores"
+          element={
+            <ProtectedRoute allowedRoles={["ADMINISTRADOR", "COORDINADOR"]}>
+              <ConductoresPage />
+            </ProtectedRoute>
+          }
+        /> */}
+      </Route>
     </Routes>
   );
 };
-
-// const Routers = () => {
-//   return (
-//     <Routes>
-//       {/* Rutas públicas */}
-//       <Route path="/" element={<SignInSide />} />
-
-//       {/* Rutas protegidas */}
-//       <Route
-//         path="/CrearUsuario"
-//         element={
-//           <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
-//             <CrearUsuario />
-//           </ProtectedRoute>
-//         }
-//       />
-//       <Route
-//         path="/TablaInformativa"
-//         element={
-//           <ProtectedRoute allowedRoles={["USUARIO"]}>
-//             <TablaInformativa />
-//           </ProtectedRoute>
-//         }
-//       />
-//     </Routes>
-//   );
-// };
 
 export default Routers;
