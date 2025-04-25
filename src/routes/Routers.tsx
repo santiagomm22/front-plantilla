@@ -1,17 +1,15 @@
 // src/router.tsx
 import { Routes, Route } from "react-router-dom";
-import SignInCard from "@/pages/login/SignInCard";
+import SignInSide from "@/pages/login/SignInSide";
 import DashboardUsuarios from "@/pages/CrearUsuarios/DashboardUsuarios";
-import RegistroForm from "@/pages/registro/RegistroForm";
-import ProtectedRoute from "./ProtectedRoute";
+// import ProtectedRoute from "./ProtectedRoute";
 import MainLayout from "@/components/layouts/MainLayout";
 
 const Routers = () => {
   return (
     <Routes>
       {/* Rutas públicas */}
-      <Route path="/" element={<SignInCard />} />
-      <Route path="/registro" element={<RegistroForm />} />
+      <Route path="/" element={<SignInSide />} />
       <Route element={<MainLayout />}>
         <Route path="/usuarios" element={<DashboardUsuarios />} />
 
