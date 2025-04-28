@@ -4,6 +4,7 @@ import SignInSide from "@/pages/login/SignInSide";
 import DashboardUsuarios from "@/pages/CrearUsuarios/DashboardUsuarios";
 // import ProtectedRoute from "./ProtectedRoute";
 import MainLayout from "@/components/layouts/MainLayout";
+import DashboardPerfil from "@/pages/perfil/DashboardPerfil";
 
 const Routers = () => {
   return (
@@ -12,6 +13,7 @@ const Routers = () => {
       <Route path="/" element={<SignInSide />} />
       <Route element={<MainLayout />}>
         <Route path="/usuarios" element={<DashboardUsuarios />} />
+        <Route path="/perfil" element={<DashboardPerfil />} />
 
         {/* Rutas protegidas con AuthLayout */}
         {/* <Route element={<MainLayout />}>

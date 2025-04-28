@@ -1,11 +1,6 @@
 /**
  * @file Content
  * @description contenido informativo ubicado junto a la card del login
- *
- * @authors
- * - Nombre del Autor 1 <asmendoza@emcali.com.co>
- *
- * @copyright VERTIEM 2025
  */
 
 import React from "react";

@@ -1,11 +1,6 @@
 /**
  * @file SignInCard
  * @description Esta página está encargada de hacer la validación y autenticación del login, además de la petición POST al backend
- *
- * @authors
- * - Nombre del Autor 1 <asmendoza@emcali.com.co>
- *
- * @copyright VERTIEM 2025
  */
 
 import * as React from "react";

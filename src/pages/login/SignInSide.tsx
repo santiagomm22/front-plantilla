@@ -1,11 +1,6 @@
 /**
  * @file SignInSide
  * @description este componente importa y utiliza los componentes "content" y "SignInCard" y es el componente que se llama para hacer de todo el login
- *
- * @authors
- * - Nombre del Autor 1 <asmendoza@emcali.com.co>
- *
- * @copyright VERTIEM 2025
  */
 
 import SignInCard from "./SignInCard";

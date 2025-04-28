@@ -1,11 +1,6 @@
 /**
  * @file ForgotPassword.tsx
  * @description Componente mejorado para recuperación de contraseña
- *
- * @authors
- * - Tu Nombre <tuemail@emcali.com.co>
- *
- * @copyright VERTIEM 2025
  */
 
 import { useState } from "react";
@@ -17,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/Dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
