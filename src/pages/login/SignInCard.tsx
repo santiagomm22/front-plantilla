@@ -86,8 +86,6 @@ export default function SignInCard({ className, ...props }: SignInCardProps) {
         },
       });
 
-      console.log("Respuesta del login:", response.data);
-
       const token = response.data.token || response.data.access_token;
       const user = response.data.user;
 
@@ -109,9 +107,6 @@ export default function SignInCard({ className, ...props }: SignInCardProps) {
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("rol", user.rol);
 
-      console.log("Token guardado:", localStorage.getItem("token"));
-      console.log("User guardado:", localStorage.getItem("user"));
-
       console.log("Contenido de localStorage (user):", user);
 
       const targetRoute = (() => {
@@ -124,11 +119,13 @@ export default function SignInCard({ className, ...props }: SignInCardProps) {
             return "/medicion";
           case "VIGILANCIA":
             return "/vigilantes";
+          case "USUARIO":
+            return "/usuarios";
           default:
             Notify.warning(
               "Rol no reconocido, redirigiendo a página por defecto."
             );
-            return "/login";
+            return "/";
         }
       })();
 

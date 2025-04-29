@@ -64,9 +64,6 @@ export const useApi = (): UseApiResult => {
   const get = useCallback(
     async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
       try {
-        console.log("Realizando petición GET a:", url);
-        console.log("Token utilizado:", getToken());
-
         const response: AxiosResponse<T> = await api.get(url, config);
         return response.data;
       } catch (error) {

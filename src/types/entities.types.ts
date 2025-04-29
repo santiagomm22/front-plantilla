@@ -28,7 +28,7 @@ export interface UserFormData {
   password: string;
 }
 
-interface Role {
+export interface Role {
   id: number;
   nombre: string;
   descripcion: string;

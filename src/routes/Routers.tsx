@@ -20,7 +20,7 @@ const Routers = () => {
         <Route
           path="/usuarios"
           element={
-            <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
+            <ProtectedRoute allowedRoles={["ADMINISTRADOR", "USUARIO"]}>
               <DashboardUsuarios />
             </ProtectedRoute>
           }
