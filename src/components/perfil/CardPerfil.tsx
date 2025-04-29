@@ -38,9 +38,13 @@ const CardPerfil: React.FC = () => {
     const fetchUserDetails = async () => {
       if (!userFromRedux) return;
 
+      // Verifica si hay un token y cómo se ve
+      const token = localStorage.getItem("token");
+      console.log("Token almacenado:", token);
+
       try {
         // Obtener datos completos del usuario
-        const user = await get<User>(`api/usuarios/${userFromRedux.id}`);
+        const user = await get<User>(`/usuarios/${userFromRedux.id}`);
         setUserData(user);
       } catch (error) {
         console.error("Error al cargar datos del perfil:", error);
@@ -187,7 +191,7 @@ const CardPerfil: React.FC = () => {
                   <span>Correo electrónico</span>
                 </div>
                 <p className="font-medium text-lg break-all">
-                  {userData?.correo || "No disponible"}
+                  {userData?.email || "No disponible"}
                 </p>
               </div>
 

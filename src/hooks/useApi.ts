@@ -39,8 +39,14 @@ export const useApi = (): UseApiResult => {
 
   // Interceptor para añadir el token a todas las peticiones
   api.interceptors.request.use((config) => {
-    const token = getToken();
-    config.headers.Authorization = `Bearer ${token}`;
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    } catch (error) {
+      console.warn("No se pudo obtener el token:", error);
+    }
     return config;
   });
 

@@ -8,7 +8,7 @@
 export interface User {
   id: number;
   nombre: string;
-  correo: string;
+  email: string;
   rol: string;
   ultimo_acceso?: string | null;
   estado?: number;
@@ -16,14 +16,14 @@ export interface User {
 
 export interface UserData {
   id: number;
-  correo: string;
+  email: string;
   nombre: string;
   rol: string;
 }
 
 export interface UserFormData {
   nombre: string;
-  correo: string;
+  email: string;
   rol: string;
   password: string;
 }

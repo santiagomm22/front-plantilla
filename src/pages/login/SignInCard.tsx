@@ -40,12 +40,12 @@ export default function SignInCard({ className, ...props }: SignInCardProps) {
   const dispatch = useDispatch();
 
   const validateInputs = () => {
-    const correo = document.getElementById("correo") as HTMLInputElement;
+    const email = document.getElementById("email") as HTMLInputElement;
     const password = document.getElementById("password") as HTMLInputElement;
 
     let isValid = true;
 
-    if (!correo.value || !/\S+@\S+\.\S+/.test(correo.value)) {
+    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
       setEmailError(true);
       setEmailErrorMessage("Ingrese un correo válido.");
       isValid = false;
@@ -73,15 +73,14 @@ export default function SignInCard({ className, ...props }: SignInCardProps) {
       return;
     }
 
-    const correo = (document.getElementById("correo") as HTMLInputElement)
-      .value;
+    const email = (document.getElementById("email") as HTMLInputElement).value;
     const data = {
-      correo,
+      email,
       password: (document.getElementById("password") as HTMLInputElement).value,
     };
 
     try {
-      const response = await axios.post(`${baseUrl}api/auth/login`, data, {
+      const response = await axios.post(`${baseUrl}/auth/login`, data, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -100,12 +99,18 @@ export default function SignInCard({ className, ...props }: SignInCardProps) {
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("rol", user.rol);
 
+      // Añade esta línea para verificar:
+      console.log(
+        "Token guardado durante login:",
+        localStorage.getItem("token")
+      );
+
       console.log("Contenido de localStorage (user):", user);
 
       const targetRoute = (() => {
         switch (user.rol) {
           case "ADMINISTRADOR":
-            return "/dashboard";
+            return "/usuarios";
           case "EMPRESA":
             return "/solicitudes";
           case "OPERARIO":
@@ -148,9 +153,9 @@ export default function SignInCard({ className, ...props }: SignInCardProps) {
 
       <form onSubmit={handleSubmit} className="flex flex-col w-full gap-4">
         <div className="grid gap-2">
-          <Label htmlFor="correo">Correo</Label>
+          <Label htmlFor="email">Correo</Label>
           <Input
-            id="correo"
+            id="email"
             type="email"
             placeholder="usuario@correo.com"
             className={emailError ? "border-red-500" : ""}

@@ -23,7 +23,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
+} from "@/components/ui/Dialog";
 
 export const DialogUsuarios = () => {
   const today = new Date();
@@ -50,7 +50,7 @@ export const DialogUsuarios = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post("/api/usuarios", formData);
+      await axios.post("/usuarios", formData);
       Notiflix.Notify.success("Usuario creado exitosamente");
       setFormData({
         nombre: "",
