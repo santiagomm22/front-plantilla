@@ -9,7 +9,7 @@ export interface User {
   id: number;
   nombre: string;
   email: string;
-  rol: string;
+  rol: Role;
   ultimo_acceso?: string | null;
   estado?: number;
 }
@@ -18,12 +18,18 @@ export interface UserData {
   id: number;
   email: string;
   nombre: string;
-  rol: string;
+  rol: Role;
 }
 
 export interface UserFormData {
   nombre: string;
   email: string;
-  rol: string;
+  rol: Role;
   password: string;
+}
+
+interface Role {
+  id: number;
+  nombre: string;
+  descripcion: string;
 }

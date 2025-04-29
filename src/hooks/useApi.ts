@@ -1,78 +1,79 @@
 /**
  * @file useApi.ts
  * @description Hook personalizado para enviar las peticiones con token de validacion
- *
- * @authors
- * - Santiago Mendoza <asmendoza@emcali.com.co>
- * - Juan David Lievano <jdlievano@emcali.com.co>
- *
- * @copyright VERTIEM 2025
  */
 
-import { useCallback } from "react"; // Importamos useCallback
+import { useCallback } from "react";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
 import { ApiError, UseApiResult } from "@/types";
 
+// Constante para la URL base
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
-
-// Configuración de la instancia de Axios
-const api = axios.create({
-  baseURL: baseUrl,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
 
 // Hook personalizado
 export const useApi = (): UseApiResult => {
-  // Función para obtener el token
-  const getToken = useCallback((): string => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      throw new Error(
-        "No se encontró un token de autenticación. Por favor, inicia sesión."
-      );
-    }
-    return token;
-  }, []); // Dependencias vacías porque no depende de variables externas
+  // Configuración de la instancia de Axios (DENTRO del hook)
+  const api = axios.create({
+    baseURL: baseUrl,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-  // Interceptor para añadir el token a todas las peticiones
-  api.interceptors.request.use((config) => {
+  // Función para obtener el token (más robusta)
+  const getToken = useCallback((): string | null => {
     try {
-      const token = localStorage.getItem("token");
+      return localStorage.getItem("token");
+    } catch (error) {
+      console.warn("Error al acceder a localStorage:", error);
+      return null;
+    }
+  }, []);
+
+  // Interceptor para añadir el token (más seguro)
+  api.interceptors.request.use(
+    (config) => {
+      const token = getToken();
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
-    } catch (error) {
-      console.warn("No se pudo obtener el token:", error);
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
     }
-    return config;
-  });
+  );
 
   // Manejo de errores genérico
   const handleError = useCallback((error: unknown): never => {
+    console.error("Error en la petición API:", error);
+
     const apiError = error as ApiError;
     const errorMessage =
       apiError.response?.data?.message ||
       apiError.response?.data?.error ||
       apiError.message ||
       "Ocurrió un error inesperado. Por favor, intenta de nuevo.";
-    Notify.failure(errorMessage);
-    throw error; // Re-lanzamos el error para que el componente lo maneje si es necesario
-  }, []); // Dependencias vacías porque no depende de variables externas
 
-  // Métodos de petición
+    Notify.failure(errorMessage);
+    throw error;
+  }, []);
+
+  // Métodos de petición (manteniendo tus implementaciones originales)
   const get = useCallback(
     async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
       try {
+        console.log("Realizando petición GET a:", url);
+        console.log("Token utilizado:", getToken());
+
         const response: AxiosResponse<T> = await api.get(url, config);
         return response.data;
       } catch (error) {
         return handleError(error);
       }
     },
-    [handleError] // Dependemos de handleError, que ya está memoizado
+    [handleError]
   );
 
   const post = useCallback(

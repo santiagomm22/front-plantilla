@@ -38,13 +38,14 @@ const CardPerfil: React.FC = () => {
     const fetchUserDetails = async () => {
       if (!userFromRedux) return;
 
-      // Verifica si hay un token y cómo se ve
-      const token = localStorage.getItem("token");
-      console.log("Token almacenado:", token);
+      // Verificaciones de debug
+      console.log("ID de usuario:", userFromRedux.id);
+      console.log("Token almacenado:", localStorage.getItem("token"));
 
       try {
         // Obtener datos completos del usuario
         const user = await get<User>(`/usuarios/${userFromRedux.id}`);
+        console.log("Datos de usuario recibidos:", user);
         setUserData(user);
       } catch (error) {
         console.error("Error al cargar datos del perfil:", error);
@@ -79,7 +80,11 @@ const CardPerfil: React.FC = () => {
   const getAvatarColor = () => {
     if (!userData?.rol) return "bg-slate-600";
 
-    switch (userData.rol.toUpperCase()) {
+    // Ahora utilizamos la propiedad 'nombre' del objeto rol
+    const rolNombre =
+      typeof userData.rol === "object" ? userData.rol.nombre : userData.rol;
+
+    switch (rolNombre.toUpperCase()) {
       case "ADMINISTRADOR":
         return "bg-amber-600";
       case "EMPRESA":
@@ -99,7 +104,11 @@ const CardPerfil: React.FC = () => {
   const getRolDescription = () => {
     if (!userData?.rol) return "";
 
-    switch (userData.rol.toUpperCase()) {
+    // También aquí usamos la propiedad 'nombre' del objeto rol
+    const rolNombre =
+      typeof userData.rol === "object" ? userData.rol.nombre : userData.rol;
+
+    switch (rolNombre.toUpperCase()) {
       case "ADMINISTRADOR":
         return "Acceso completo al sistema, gestión de usuarios y configuraciones";
       case "EMPRESA":
@@ -144,7 +153,7 @@ const CardPerfil: React.FC = () => {
                 {userData?.nombre.toLocaleUpperCase() || "N/A"}
               </h3>
               <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-primary/10 text-primary">
-                {userData?.rol || "Rol no definido"}
+                {userData?.rol.nombre || "Rol no definido"}
               </div>
               <p className="text-sm text-muted-foreground mt-2">
                 {getRolDescription()}
@@ -202,7 +211,7 @@ const CardPerfil: React.FC = () => {
                   <span>Rol asignado</span>
                 </div>
                 <p className="font-medium text-lg">
-                  {userData?.rol || "No disponible"}
+                  {userData?.rol.nombre || "No disponible"}
                 </p>
               </div>
             </div>

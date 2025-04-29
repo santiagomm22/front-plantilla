@@ -86,24 +86,31 @@ export default function SignInCard({ className, ...props }: SignInCardProps) {
         },
       });
 
-      const { access_token, user } = response.data;
+      console.log("Respuesta del login:", response.data);
 
+      const token = response.data.token || response.data.access_token;
+      const user = response.data.user;
+
+      if (!token || !user) {
+        console.error("Formato de respuesta inválido:", response.data);
+        Notify.failure("Error: Formato de respuesta del servidor inválido");
+        return;
+      }
+
+      // Guardamos en Redux
       dispatch(
         loginSuccess({
-          token: access_token,
+          token,
           user,
         })
       );
 
-      localStorage.setItem("token", access_token);
+      localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("rol", user.rol);
 
-      // Añade esta línea para verificar:
-      console.log(
-        "Token guardado durante login:",
-        localStorage.getItem("token")
-      );
+      console.log("Token guardado:", localStorage.getItem("token"));
+      console.log("User guardado:", localStorage.getItem("user"));
 
       console.log("Contenido de localStorage (user):", user);
 

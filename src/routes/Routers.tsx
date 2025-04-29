@@ -2,7 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 import SignInSide from "@/pages/login/SignInSide";
 import DashboardUsuarios from "@/pages/CrearUsuarios/DashboardUsuarios";
-// import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
 import MainLayout from "@/components/layouts/MainLayout";
 import DashboardPerfil from "@/pages/perfil/DashboardPerfil";
 
@@ -11,39 +11,29 @@ const Routers = () => {
     <Routes>
       {/* Rutas públicas */}
       <Route path="/" element={<SignInSide />} />
-      <Route element={<MainLayout />}>
-        <Route path="/usuarios" element={<DashboardUsuarios />} />
-        <Route path="/perfil" element={<DashboardPerfil />} />
 
-        {/* Rutas protegidas con AuthLayout */}
-        {/* <Route element={<MainLayout />}>
+      {/* <Route path="/usuarios" element={<DashboardUsuarios />} />
+      <Route path="/perfil" element={<DashboardPerfil />} /> */}
+
+      {/* Rutas protegidas con AuthLayout */}
+      <Route element={<MainLayout />}>
         <Route
-          path="/dashboard"
+          path="/usuarios"
           element={
             <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
-              <DashboardPage />
+              <DashboardUsuarios />
             </ProtectedRoute>
           }
-        /> */}
-        {/* Agrega más rutas protegidas aquí según necesites */}
-        {/* Ejemplo: Ruta para Empresas */}
-        {/* <Route
-          path="/empresas"
+        />
+
+        <Route
+          path="/perfil"
           element={
-            <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
-              <EmpresasPage />
+            <ProtectedRoute allowedRoles={["ADMINISTRADOR", "USUARIO"]}>
+              <DashboardPerfil />
             </ProtectedRoute>
           }
-        /> */}
-        {/* Ejemplo: Ruta para Conductores */}
-        {/* <Route
-          path="/conductores"
-          element={
-            <ProtectedRoute allowedRoles={["ADMINISTRADOR", "COORDINADOR"]}>
-              <ConductoresPage />
-            </ProtectedRoute>
-          }
-        /> */}
+        />
       </Route>
     </Routes>
   );
