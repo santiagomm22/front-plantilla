@@ -12,21 +12,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import {
-  ArrowUpDown,
-  CalendarDays,
-  Edit,
-  MoreHorizontal,
-  Trash,
-} from "lucide-react";
+import { ArrowUpDown, CalendarDays, Edit } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/DropdownMenu";
+
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -50,7 +39,7 @@ export function UserDataTable() {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { get, del } = useApi();
+  const { get } = useApi();
 
   // Fecha actual para mostrar en la cabecera
   const today = new Date();
@@ -86,19 +75,6 @@ export function UserDataTable() {
 
     fetchUsers();
   }, []);
-
-  // Manejar eliminación de usuario
-  const handleDeleteUser = async (userId: number) => {
-    try {
-      await del(`/usuarios/${userId}`);
-      Notify.success("Usuario eliminado correctamente");
-      // Actualizar la lista de usuarios después de eliminar
-      setUsers(users.filter((user) => user.id !== userId));
-    } catch (error) {
-      console.error("Error al eliminar usuario:", error);
-      Notify.failure("No se pudo eliminar el usuario");
-    }
-  };
 
   // Definir columnas
   const columns: ColumnDef<User>[] = [
@@ -179,40 +155,12 @@ export function UserDataTable() {
     },
     {
       id: "actions",
-      cell: ({ row }) => {
-        const user = row.original;
-
+      header: "Acciones",
+      cell: ({}) => {
         return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Abrir menú</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem
-                className="flex items-center cursor-pointer"
-                onClick={() => console.log("Editar usuario", user.id)}
-              >
-                <Edit className="mr-2 h-4 w-4" />
-                <span>Editar</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                className="flex items-center cursor-pointer text-red-600"
-                onClick={() => {
-                  if (
-                    window.confirm(`¿Está seguro de eliminar a ${user.nombre}?`)
-                  ) {
-                    handleDeleteUser(user.id);
-                  }
-                }}
-              >
-                <Trash className="mr-2 h-4 w-4" />
-                <span>Eliminar</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <Edit className="h-4 w-4" />
+          </Button>
         );
       },
     },
