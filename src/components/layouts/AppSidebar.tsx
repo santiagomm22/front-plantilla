@@ -1,15 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  Frame,
-  LifeBuoy,
-  Map,
-  PieChart,
-  Send,
-  Users,
-  FileText,
-} from "lucide-react";
+import { Users, FileText } from "lucide-react";
 
 import { NavMain } from "@/components/layouts/nav-main";
 import { NavUser } from "@/components/layouts/nav-user";
@@ -41,35 +33,6 @@ const data = {
       url: "/reportes",
       icon: FileText,
       isActive: false,
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Support",
-      url: "#",
-      icon: LifeBuoy,
-    },
-    {
-      title: "Feedback",
-      url: "#",
-      icon: Send,
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
     },
   ],
 };
