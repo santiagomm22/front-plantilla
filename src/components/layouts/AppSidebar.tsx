@@ -1,10 +1,10 @@
-"use client";
-
 import * as React from "react";
-import { Users, FileText } from "lucide-react";
+import { Users, Home, LogOut } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { logout } from "@/store/slices/authSlice";
 
-import { NavMain } from "@/components/layouts/nav-main";
-import { NavUser } from "@/components/layouts/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -13,31 +13,49 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
+import { NavUser } from "@/components/layouts/nav-user";
 
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+// Definición de elementos de navegación con control de roles
+const navItems = [
+  {
+    title: "Usuarios",
+    url: "/usuarios",
+    icon: Users,
+    roles: ["ADMINISTRADOR"],
   },
-  navMain: [
-    {
-      title: "Usuarios",
-      url: "/usuarios",
-      icon: Users,
-      isActive: false,
-    },
-    {
-      title: "Reportes",
-      url: "/reportes",
-      icon: FileText,
-      isActive: false,
-    },
-  ],
-};
+  {
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: Home,
+    roles: ["ADMINISTRADOR", "USUARIO"],
+  },
+];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { setOpenMobile } = useSidebar();
+
+  // Obtener información del usuario desde Redux
+  const user = useSelector((state: RootState) => state.auth.user);
+  const userRole = localStorage.getItem("rol") || (user?.rol as string);
+
+  // Filtrar elementos de navegación según el rol del usuario
+  const filteredNavItems = navItems.filter((item) => {
+    if (item.roles && userRole) {
+      return item.roles.includes(userRole);
+    }
+    return false;
+  });
+
+  // Determinar si un elemento está activo
+  const isActive = (url: string) => {
+    return location.pathname === url || location.pathname.startsWith(`${url}/`);
+  };
+
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -46,12 +64,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton size="lg" asChild>
               <div className="flex h-8 items-center justify-center">
                 <img
-                  src="./images/logo-emcali.webp"
+                  src="/images/logo-emcali.webp"
                   alt="EMCALI Logo"
                   className="h-auto w-38 dark:hidden"
                 />
                 <img
-                  src="./images/logo-emcali-clear.webp"
+                  src="/images/logo-emcali-clear.webp"
                   alt="EMCALI Logo"
                   className="hidden h-auto w-42 dark:block"
                 />
@@ -60,11 +78,37 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <SidebarMenu>
+          {filteredNavItems.map((item) => (
+            <SidebarMenuItem key={item.title}>
+              <SidebarMenuButton
+                asChild
+                tooltip={item.title}
+                isActive={isActive(item.url)}
+                onClick={() => setOpenMobile(false)}
+              >
+                <Link to={item.url}>
+                  <item.icon />
+                  <span>{item.title}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
       </SidebarContent>
+
       <SidebarFooter>
-        <NavUser user={data.user} />
+        {user && (
+          <NavUser
+            user={{
+              name: user.nombre || "Usuario",
+              email: user.email || "usuario@vertiem.com",
+              avatar: "/avatars/default.png",
+            }}
+          />
+        )}
       </SidebarFooter>
     </Sidebar>
   );
