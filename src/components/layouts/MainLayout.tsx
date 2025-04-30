@@ -104,8 +104,8 @@ export default function MainLayout() {
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Link to="/perfil">Perfil</Link>
+                <DropdownMenuItem onClick={() => navigate("/perfil")}>
+                  Perfil
                 </DropdownMenuItem>
                 <DropdownMenuItem>Configuración</DropdownMenuItem>
                 <DropdownMenuSeparator />

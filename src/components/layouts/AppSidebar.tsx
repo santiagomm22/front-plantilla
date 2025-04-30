@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Users, Home, LogOut } from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Users, Home } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { logout } from "@/store/slices/authSlice";
 
 import {
   Sidebar,
@@ -35,9 +34,7 @@ const navItems = [
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const location = useLocation();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { setOpenMobile } = useSidebar();
+  const { setOpenMobile, state } = useSidebar();
 
   // Obtener información del usuario desde Redux
   const user = useSelector((state: RootState) => state.auth.user);
@@ -57,22 +54,39 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   };
 
   return (
-    <Sidebar variant="inset" {...props}>
+    <Sidebar collapsible="icon" variant="inset" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <div className="flex h-8 items-center justify-center">
-                <img
-                  src="/images/logo-emcali.webp"
-                  alt="EMCALI Logo"
-                  className="h-auto w-38 dark:hidden"
-                />
-                <img
-                  src="/images/logo-emcali-clear.webp"
-                  alt="EMCALI Logo"
-                  className="hidden h-auto w-42 dark:block"
-                />
+                {state !== "collapsed" ? (
+                  <>
+                    <img
+                      src="/images/logo-emcali.webp"
+                      alt="EMCALI Logo"
+                      className="h-auto w-38 dark:hidden"
+                    />
+                    <img
+                      src="/images/logo-emcali-clear.webp"
+                      alt="EMCALI Logo"
+                      className="hidden h-auto w-42 dark:block"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <img
+                      src="/images/LOGOEMCALIICONO.webp"
+                      alt="EMCALI Icon"
+                      className="h-8 w-8 dark:hidden"
+                    />
+                    <img
+                      src="/images/icono-emcali-clear.webp"
+                      alt="EMCALI Icon"
+                      className="hidden h-8 w-8 dark:block"
+                    />
+                  </>
+                )}
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
