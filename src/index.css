@@ -139,11 +139,6 @@
     @apply bg-accent text-accent-foreground;
   }
 
-  /* Estilos para los botones */
-  button {
-    @apply bg-muted text-foreground border border-border;
-  }
-
   button:hover {
     @apply bg-accent text-accent-foreground;
   }
