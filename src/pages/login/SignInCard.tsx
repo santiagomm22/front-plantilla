@@ -13,7 +13,6 @@ import axios from "axios";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
 import { loginSuccess } from "../../store/slices/authSlice";
 import { useDispatch } from "react-redux";
-import ForgotPassword from "./ForgotPassword";
 import { Eye, EyeOff } from "lucide-react"; // Importamos íconos de lucide-react
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
@@ -112,7 +111,7 @@ export default function SignInCard({ className, ...props }: SignInCardProps) {
       const targetRoute = (() => {
         switch (user.rol) {
           case "ADMINISTRADOR":
-            return "/usuarios";
+            return "/dashboard";
           case "EMPRESA":
             return "/solicitudes";
           case "OPERARIO":
@@ -173,7 +172,6 @@ export default function SignInCard({ className, ...props }: SignInCardProps) {
           {/* Contenedor flex para la etiqueta y el enlace de recuperación */}
           <div className="flex items-center justify-between">
             <Label htmlFor="password">Contraseña</Label>
-            <ForgotPassword />
           </div>
           <div className="relative">
             <Input

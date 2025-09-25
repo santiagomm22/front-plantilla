@@ -19,16 +19,16 @@ import { NavUser } from "@/components/layouts/nav-user";
 // Definición de elementos de navegación con control de roles
 const navItems = [
   {
-    title: "Usuarios",
-    url: "/usuarios",
-    icon: Users,
-    roles: ["ADMINISTRADOR"],
-  },
-  {
     title: "Dashboard",
     url: "/dashboard",
     icon: Home,
     roles: ["ADMINISTRADOR", "USUARIO"],
+  },
+  {
+    title: "Usuarios",
+    url: "/usuarios",
+    icon: Users,
+    roles: ["ADMINISTRADOR"],
   },
 ];
 

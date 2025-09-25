@@ -5,6 +5,7 @@ import DashboardUsuarios from "@/pages/CrearUsuarios/DashboardUsuarios";
 import ProtectedRoute from "./ProtectedRoute";
 import MainLayout from "@/components/layouts/MainLayout";
 import DashboardPerfil from "@/pages/perfil/DashboardPerfil";
+import Dashboard from "@/pages/Dashboard/Dashboard";
 
 const Routers = () => {
   return (
@@ -17,6 +18,15 @@ const Routers = () => {
 
       {/* Rutas protegidas con AuthLayout */}
       <Route element={<MainLayout />}>
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={["ADMINISTRADOR", "USUARIO"]}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/usuarios"
           element={
